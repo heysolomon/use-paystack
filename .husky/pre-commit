@@ -1,0 +1,15 @@
+# Fast checks before each commit. Skip once with: git commit --no-verify
+set -e
+
+# The project rule is no em dashes in docs or comments. Check staged text files only.
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- '*.ts' '*.tsx' '*.mjs' '*.js' '*.md' '*.json')
+if [ -n "$staged" ]; then
+  if git diff --cached -U0 -- $staged | grep -n '^+.*—' >/dev/null; then
+    echo "pre-commit: staged changes contain an em dash (—). Use a comma, colon or full stop instead:"
+    git diff --cached -U0 -- $staged | grep '^+.*—'
+    exit 1
+  fi
+fi
+
+npm run --silent typecheck
+npm test --silent

@@ -1,0 +1,84 @@
+{
+  "name": "use-paystack",
+  "version": "0.1.0",
+  "description": "Modern React hooks and components for Paystack checkout, plus server helpers to initialize, verify and receive webhooks. SSR safe, React 18 and 19.",
+  "keywords": [
+    "paystack",
+    "react",
+    "react-paystack",
+    "nextjs",
+    "payments",
+    "checkout",
+    "hook",
+    "nigeria",
+    "webhook"
+  ],
+  "author": "Solomon Akuson",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/server.d.ts",
+        "default": "./dist/server.js"
+      },
+      "require": {
+        "types": "./dist/server.d.cts",
+        "default": "./dist/server.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:dist": "node scripts/check-dist.mjs",
+    "verify": "npm run typecheck && npm test && npm run build && npm run check:dist",
+    "prepublishOnly": "npm run verify",
+    "prepare": "husky"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@paystack/inline-js": "^2.26.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "husky": "^9.1.7",
+    "jsdom": "^27.0.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsup": "^8.5.1",
+    "typescript": "~6.0.3",
+    "vitest": "^3.2.7"
+  }
+}
